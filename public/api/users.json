@@ -263,6 +263,14 @@
       "role_name": "Admin",
       "id": 38,
       "created_at": "2023-12-05T12:58:08.149Z"
+    },
+    {
+      "first_name": "Milos",
+      "last_name": "Jepurovic",
+      "email": "milosje1992@gmail.com",
+      "role_name": "Admin",
+      "id": 39,
+      "created_at": "2023-12-05T19:46:40.891Z"
     }
   ],
   "role_names": [

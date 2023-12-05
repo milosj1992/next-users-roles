@@ -1,9 +1,9 @@
 import React from "react";
-import GenericCreateForm from "@/forms/GenericCreateForm";
+import GenericCreateForm from "../../../forms/GenericCreateForm";
 import axios, { AxiosResponse } from "axios";
-import { validateUser } from "@/forms/validations";
-import { userFields } from "@/forms/fieldForm";
-import { roleOptions } from "@/forms/fieldForm";
+import { validateUser } from "../../../forms/validations";
+import { userFields } from "../../../forms/fieldForm";
+import { roleOptions } from "../../../forms/fieldForm";
 import { RoleFormValues, UserFormValues } from "@/common/types";
 
 interface UserFieldsItem {

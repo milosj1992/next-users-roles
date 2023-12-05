@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import GenericUpdateForm from "@/forms/GenericUpdateForm";
+import GenericUpdateForm from "../../../forms/GenericUpdateForm";
 import axios, { AxiosResponse } from "axios";
-import { validateUser } from "@/forms/validations";
-import { userFields } from "@/forms/fieldForm";
-import { roleOptions } from "@/forms/fieldForm";
+import { validateUser } from "../../../forms/validations";
+import { userFields } from "../../../forms/fieldForm";
+import { roleOptions } from "../../../forms/fieldForm";
 import { useRouter } from "next/router";
 import { User } from "@/common/types";
 import { UserFormValues,RoleFormValues } from "@/common/types";

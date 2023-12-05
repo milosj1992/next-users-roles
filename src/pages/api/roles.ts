@@ -31,6 +31,7 @@ function isrole_nameUnique(role_name: string, roles: Role[], roleIdToExclude: nu
   return !roles.some((r) => r.role_name === role_name && r.id !== roleIdToExclude);
 }
 
+
 function calculateNextRoleId(roles: Role[]): number {
   const maxId = roles.reduce((max, role) => (role.id > max ? role.id : max), 0);
   return maxId + 1;

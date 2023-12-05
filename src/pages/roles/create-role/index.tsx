@@ -1,10 +1,10 @@
 import React from "react";
 import axios, { AxiosResponse } from "axios"; // Import AxiosResponse
 
-import GenericForm from "@/forms/GenericCreateForm";
-import { validateRole } from "@/forms/validations";
-import { roleFields } from "@/forms/fieldForm";
-import { roleOptions } from "@/forms/fieldForm";
+import GenericForm from "../../../forms/GenericCreateForm";
+import { validateRole } from "../../../forms/validations";
+import { roleFields } from "../../../forms/fieldForm";
+import { roleOptions } from "../../../forms/fieldForm";
 import { RoleFormValues, UserFormValues } from "@/common/types";
 
 // Define the type for the form values

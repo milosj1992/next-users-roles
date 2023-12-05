@@ -75,7 +75,14 @@ export default async function handler(
       response.data = userData;
     }
   } else if (req.method === "POST") {
-
+    /**
+     *  {
+        "first_name": "Johnsadsa",
+        "last_name": "Doe",
+        "email": "john.doe@example.com",
+        "role": "Admin"
+      }
+     */
     try {
       let users = readDataFromFile();
       const newUser: User = req.body; // Assuming you send the role data in the request body
@@ -110,7 +117,7 @@ export default async function handler(
         const userData = readDataFromFile();
         //const user = findUserById(id, userData.users);
         const usersIndex = users.users.findIndex((r) => r.id === idFromQuery);
-        
+        //   const usersIndex = findUserById(idFromQuery, userData.users);
         if (usersIndex !== -1) {
           let userId = userData.users[usersIndex].id;
           let userDate = userData.users[usersIndex].created_at;

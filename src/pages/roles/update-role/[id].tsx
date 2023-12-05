@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import GenericUpdateForm from "@/forms/GenericUpdateForm";
+import GenericUpdateForm from "../../../forms/GenericUpdateForm";
 import axios from "axios";
 
-import { validateRole } from "@/forms/validations";
-import { roleFields } from "@/forms/fieldForm";
-import { roleOptions } from "@/forms/fieldForm";
+import { validateRole } from "../../../forms/validations";
+import { roleFields } from "../../../forms/fieldForm";
+import { roleOptions } from "../../../forms/fieldForm";
 import { Role } from "@/common/types";
 import { UserFormValues,RoleFormValues } from "@/common/types";
 
