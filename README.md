@@ -32,7 +32,7 @@ npm run dev
 - To create a new user, use the actions provided in `src/pages/users/create-user/` along with the reusable Form component `src/forms/GenericCreateForm.tsx`.
   - The API for creating a user using the POST method is located in `src/pages/api/users.ts` (line 77).
 - To update a user, use the actions provided in `src/pages/users/update-users/` along with the reusable Form component `src/forms/GenericUpdateForm.tsx`.
-  - The API for updating a user using the PUT method is located in `src/pages/api/roles.ts` (line 109).
+  - The API for updating a user using the PUT method is located in `src/pages/api/users.ts` (line 109).
 - Validation for users can be found in `src/forms/validations.ts`.
 
 ## Redirection
