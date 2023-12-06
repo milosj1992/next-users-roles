@@ -16,8 +16,8 @@ npm run dev
 - The data table is stored in `public/api/roles.json`.
 - The API is located in `src/pages/api/roles.ts`.
 - To ensure no duplicate role names are allowed, a function called `isRoleNameUnique` is implemented in `src/pages/api/roles.ts` (line 30).
-- The UI for the Roles data table list can be found in `src/pages/roles/index.tsx`.
-- Role names can be sorted alphabetically, implemented in `src/pages/roles/index.tsx` (line 23).
+- The UI for the Roles data table list can be found in `src/pages/roles/Roles.tsx`.
+- Role names can be sorted alphabetically, implemented in `src/pages/roles/Roles.tsx` (line 23).
 - To create a new role, use the actions provided in `src/pages/roles/create-role/` along with the reusable Form component `src/forms/GenericCreateForm.tsx`.
   - The API for creating a role using the POST method is located in `src/pages/api/roles.ts` (line 69).
 - To update a role, use the actions provided in `src/pages/roles/update-role/` along with the reusable Form component `src/forms/GenericUpdateForm.tsx`.
@@ -28,7 +28,8 @@ npm run dev
 
 - The data table is stored in `public/api/users.json`.
 - The API is located in `src/pages/api/users.ts`.
-- Users can be sorted by date/time in descending order, implemented in `src/pages/roles/index.tsx` (line 33).
+- The UI for the Users data table list can be found in `src/pages/roles/Users.tsx`.
+- Users can be sorted by date/time in descending order, implemented in `src/pages/roles/Users.tsx` (line 33).
 - To create a new user, use the actions provided in `src/pages/users/create-user/` along with the reusable Form component `src/forms/GenericCreateForm.tsx`.
   - The API for creating a user using the POST method is located in `src/pages/api/users.ts` (line 77).
 - To update a user, use the actions provided in `src/pages/users/update-users/` along with the reusable Form component `src/forms/GenericUpdateForm.tsx`.
