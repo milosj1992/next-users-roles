@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 
 import { RoleFormValues, UserFormValues } from "@/common/types";
@@ -38,13 +38,19 @@ const GenericCreateForm: React.FC<GenericFormProps> = ({
   textFields,
   pageRedirect,
 }) => {
+  const [validationError, setValidationError] = useState<string | null>(null);
   const router = useRouter();
   const handleSubmit = async (values: RoleFormValues | UserFormValues) => {
+   
+
     try {
       setTimeout(async () => {
         const response = await onSubmit(values);
         if (response.status_code >= 200 && response.status_code <= 299) {
           router.push(pageRedirect);
+        }
+        else if(response.status_code===400){
+          setValidationError("Role name must be unique");
         }
       }, 2000);
     } catch (error) {
@@ -63,15 +69,19 @@ const GenericCreateForm: React.FC<GenericFormProps> = ({
               {textFields.map((item) => (
                 <Grid item xs={12} key={item.id}>
                   {item.type !== "select" ? (
+                    
                     <Field name={item.name}>
+                      
                       {({ input, meta }) => (
+                        
                         <TextField
                           {...input}
                           label={item.label}
                           type={item.text}
                           fullWidth
-                          error={meta.touched && meta.error !== undefined}
-                          helperText={meta.touched && meta.error}
+                          error={meta.touched && meta.error !== undefined ||item.name==="role_name" && validationError !==null}
+                          helperText={meta.touched && meta.error ||item.name==="role_name" && validationError}
+                          
                         />
                       )}
                     </Field>
@@ -110,10 +120,14 @@ const GenericCreateForm: React.FC<GenericFormProps> = ({
                           </FormHelperText>
                         </div>
                       )}
+                      
                     </Field>
+                    
                   ) : null}
                 </Grid>
+                
               ))}
+              
               <Grid item xs={12}>
                 {" "}
                 {/* This Grid item remains full width */}

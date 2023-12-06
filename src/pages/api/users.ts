@@ -61,7 +61,6 @@ export default async function handler(
     if (req.query.id) {
       const id = parseInt(req.query.id as string, 10);
       const userData = readDataFromFile();
-      console.log(userData)
       const user = findUserById(id, userData.users);
 
       if (user) {

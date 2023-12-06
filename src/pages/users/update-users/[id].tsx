@@ -33,7 +33,6 @@ const UpdateUser: React.FC = () => {
         return response;
       }
       if (response.data.status_code >= 200 && response.data.status_code <= 299) {
-        console.log(response)
         router.push("/users");
         return { data: response.data };
       }

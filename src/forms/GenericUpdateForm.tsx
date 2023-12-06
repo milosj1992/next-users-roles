@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { useRouter } from "next/router";
 
@@ -39,7 +39,8 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
   pageRedirect,
 }) => {
   const router = useRouter();
-  
+  const [validationError, setValidationError] = useState<string | null>(null);
+
   const handleSubmit = async (values: RoleFormValues | UserFormValues) => {
     try {
       setTimeout(async () => {
@@ -51,6 +52,9 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
         ) {
           router.push(pageRedirect);
           // Delay for 2000 milliseconds (2 seconds), you can adjust this value as needed
+        }
+        else if(response.data.status_code===400){
+          setValidationError("Role name must be unique");
         }
       }, 2000);
     } catch (error) {
@@ -76,9 +80,9 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
                           label={item.label}
                           type={item.text}
                           fullWidth
-                          error={meta.touched && meta.error !== undefined}
-                          helperText={meta.touched && meta.error}
-                        />
+                          error={meta.touched && meta.error !== undefined ||item.name==="role_name" && validationError !==null}
+                          helperText={meta.touched && meta.error ||item.name==="role_name" && validationError}
+                             />
                       )}
                     </Field>
                   ) : item.type === "select" ? (
