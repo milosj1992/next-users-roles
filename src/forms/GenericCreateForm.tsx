@@ -41,20 +41,26 @@ const GenericCreateForm: React.FC<GenericFormProps> = ({
   const [validationError, setValidationError] = useState<string | null>(null);
   const router = useRouter();
   const handleSubmit = async (values: RoleFormValues | UserFormValues) => {
-   
-
     try {
-      setTimeout(async () => {
-        const response = await onSubmit(values);
-        if (response.status_code >= 200 && response.status_code <= 299) {
-          router.push(pageRedirect);
-        }
-        else if(response.status_code===400){
-          setValidationError("Role name must be unique");
-        }
-      }, 2000);
+      const response = await onSubmit(values);
+
+      if (response.status_code === 400) {
+        setValidationError("Role name must be unique");
+      } else {
+        setTimeout(() => {
+          if (response.status_code >= 200 && response.status_code <= 299) {
+            router.push(pageRedirect);
+          }
+        }, 2000);
+      }
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+  const handleInputChange = () => {
+    // Clear the validation error when the user continues typing
+    if (validationError) {
+      setValidationError(null);
     }
   };
   return (
@@ -69,19 +75,27 @@ const GenericCreateForm: React.FC<GenericFormProps> = ({
               {textFields.map((item) => (
                 <Grid item xs={12} key={item.id}>
                   {item.type !== "select" ? (
-                    
                     <Field name={item.name}>
-                      
                       {({ input, meta }) => (
-                        
                         <TextField
                           {...input}
                           label={item.label}
                           type={item.text}
                           fullWidth
-                          error={meta.touched && meta.error !== undefined ||item.name==="role_name" && validationError !==null}
-                          helperText={meta.touched && meta.error ||item.name==="role_name" && validationError}
-                          
+                          error={
+                            meta.touched && meta.error !== undefined
+                              ? true
+                              : item.name === "role_name" &&
+                                validationError !== null
+                          }
+                          helperText={
+                            (meta.touched && meta.error) ||
+                            (item.name === "role_name" && validationError)
+                          }
+                          onChange={(e) => {
+                            handleInputChange(); // Clear error on input change
+                            input.onChange(e); // Update the input value
+                          }}
                         />
                       )}
                     </Field>
@@ -120,14 +134,11 @@ const GenericCreateForm: React.FC<GenericFormProps> = ({
                           </FormHelperText>
                         </div>
                       )}
-                      
                     </Field>
-                    
                   ) : null}
                 </Grid>
-                
               ))}
-              
+
               <Grid item xs={12}>
                 {" "}
                 {/* This Grid item remains full width */}

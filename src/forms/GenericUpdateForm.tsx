@@ -43,22 +43,27 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
 
   const handleSubmit = async (values: RoleFormValues | UserFormValues) => {
     try {
-      setTimeout(async () => {
-        const response = await onSubmit(values);
-
-        if (
-          response.data.status_code >= 200 &&
-          response.data.status_code <= 299
-        ) {
-          router.push(pageRedirect);
-          // Delay for 2000 milliseconds (2 seconds), you can adjust this value as needed
-        }
-        else if(response.data.status_code===400){
-          setValidationError("Role name must be unique");
-        }
-      }, 2000);
+      const response = await onSubmit(values);
+      if (response.data.status_code === 400) {
+        setValidationError("Role name must be unique");
+      } else {
+        setTimeout(() => {
+          if (
+            response.data.status_code >= 200 &&
+            response.data.status_code <= 299
+          ) {
+            router.push(pageRedirect);
+          }
+        }, 2000);
+      }
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+  const handleInputChange = () => {
+    // Clear the validation error when the user continues typing
+    if (validationError) {
+      setValidationError(null);
     }
   };
   return (
@@ -80,9 +85,21 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
                           label={item.label}
                           type={item.text}
                           fullWidth
-                          error={meta.touched && meta.error !== undefined ||item.name==="role_name" && validationError !==null}
-                          helperText={meta.touched && meta.error ||item.name==="role_name" && validationError}
-                             />
+                          error={
+                            meta.touched && meta.error !== undefined
+                              ? true
+                              : item.name === "role_name" &&
+                                validationError !== null
+                          }
+                          helperText={
+                            (meta.touched && meta.error) ||
+                            (item.name === "role_name" && validationError)
+                          }
+                          onChange={(e) => {
+                            handleInputChange(); // Clear error on input change
+                            input.onChange(e); // Update the input value
+                          }}
+                        />
                       )}
                     </Field>
                   ) : item.type === "select" ? (
@@ -97,8 +114,6 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
                             displayEmpty
                             error={meta.touched && meta.error !== undefined}
                           >
-                     
-
                             <MenuItem value="">
                               <em
                                 style={{
