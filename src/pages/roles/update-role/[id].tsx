@@ -37,6 +37,7 @@ const UpdateRole: React.FC = () => {
         return { data: response.data };
       }
       if (response.data.status_code >= 200 && response.data.status_code <= 299) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         router.push("/roles");
         return { data: response.data };
       }

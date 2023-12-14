@@ -33,6 +33,7 @@ const UpdateUser: React.FC = () => {
         return response;
       }
       if (response.data.status_code >= 200 && response.data.status_code <= 299) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         router.push("/users");
         return { data: response.data };
       }

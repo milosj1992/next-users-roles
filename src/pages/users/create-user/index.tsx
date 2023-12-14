@@ -32,7 +32,14 @@ const CreateUser: React.FC = () => {
 
       // Send a POST request to create a new user or role based on the interface used
       const response: AxiosResponse = await axios.post("/api/users", forSend);
-      return response.data;
+      if( response.data.status_code===201){
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return response.data;
+
+      }
+      else{
+        return response.data;
+      }
     } catch (error) {
       console.error("Error creating user/role:", error);
       throw error;

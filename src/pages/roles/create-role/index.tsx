@@ -31,7 +31,15 @@ const CreateRole: React.FC = () => {
         };
       }
       const response: AxiosResponse = await axios.post("/api/roles", forSend);
-      return response.data; // Return the response data with the expected structure
+      if( response.data.status_code===201){
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return response.data;
+
+      }
+      else{
+        return response.data;
+      }
+       // Return the response data with the expected structure
     } catch (error) {
       console.error("Error creating role:", error);
       throw error; // Rethrow the error for error handling

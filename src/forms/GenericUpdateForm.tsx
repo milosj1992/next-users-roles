@@ -47,14 +47,12 @@ const GenericUpdateForm: React.FC<GenericFormProps> = ({
       if (response.data.status_code === 400) {
         setValidationError("Role name must be unique");
       } else {
-        setTimeout(() => {
-          if (
-            response.data.status_code >= 200 &&
-            response.data.status_code <= 299
-          ) {
-            router.push(pageRedirect);
-          }
-        }, 2000);
+        if (
+          response.data.status_code >= 200 &&
+          response.data.status_code <= 299
+        ) {
+          router.push(pageRedirect);
+        }
       }
     } catch (error) {
       console.error("Error:", error);
